@@ -3,7 +3,7 @@ import os
 
 
 class Config():
-    DEBUG = False
+    DEBUG = True
     DATABASE_NAME = 'dns_admin'
     DATABASE_USER = 'dns_admin_usr'
     DATABASE_PASSWORD = 'dns@321'
