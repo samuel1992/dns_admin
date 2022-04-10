@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  dns-server:
+    container_name: dns-server
+    build: dns-server
+    expose:
+      - "53/tcp"
+      - "53/udp"
+        #  app:
+        #    container_name: app
+        #    build: app
+        #    expose:
+        #      - "5000"
+        #    ports:
+        #      - "5000:5000"
