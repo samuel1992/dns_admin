@@ -42,7 +42,7 @@ app/
   - power_dns/
     - api.py
     - service.py
-  run.py # Run the python Flask app
+  app.py # Run the python Flask app
   config.py # Stores all the configuration by the project (mostly got from env)
   extensions.py # Setup the database configuration to avoid ciclic import on the files
   fixtures.py # Create some pytest fixtures to our unittests
