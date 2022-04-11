@@ -48,4 +48,4 @@ class RecordService:
         for attr, value in params.items():
             query = query.filter(getattr(Record, attr)==value)
 
-        return query
+        return RecordsSchema(query.first()).serialize()

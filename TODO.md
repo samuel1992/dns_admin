@@ -11,14 +11,9 @@ The main goal is to make a tool to adminitrate the dns server records.
 - Api to CRUD the DNS records via Frontend #DONE
 - Api to query the DNS records via PowerDNS
   - filter method 'lookup':
-    - filter by qtype == 'SOA'
-      - retrieve from db the record with qname requested
-      - return Array[Object(qtype:'SOA', qname:record.qname, content:record.content, ttl:)]
-    - filter by qtype 'ANY' or 'A':
-      - retrieve from db the record with qname requested
       - return Array[Object(qtype:'A', qname:record.qname, content:record.content, ttl:)]
-  - filter method 'getDomainMetadata'
-    - return an empty array []
+  - filter method 'getDomainMetadata' #DONE
+    - return an empty array [] #DONE
 - Add fields validation in model layer
 - Add fields validation in schema layer
 - Frontend to manage the records through the API

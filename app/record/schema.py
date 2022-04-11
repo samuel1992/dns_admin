@@ -4,17 +4,17 @@ from dataclasses import dataclass, asdict
 # TODO: add validation fields content. Like IP format fields
 @dataclass
 class Record:
-    id: int
     qtype: str
     qname: str
     content: str
+    ttl: int
 
     @classmethod
     def from_instance(cls, instance):
-        return cls(id=instance.id,
-                   qtype=instance.qtype,
+        return cls(qtype=instance.qtype,
                    qname=instance.qname,
-                   content=instance.content)
+                   content=instance.content,
+                   ttl=instance.ttl)
 
 
 class RecordsSchema:

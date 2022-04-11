@@ -74,6 +74,6 @@ def test_record_filter_by(db):
     db.session.add(record)
     db.session.commit()
 
-    query = RecordService.filter_by({'qname': 'test.com'})
+    found_record = RecordService.filter_by({'qname': record.qname})
 
-    assert query.first() == record
+    assert found_record[0]['qname'] == record.qname
