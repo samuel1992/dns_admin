@@ -43,10 +43,13 @@ class RecordService:
         return RecordsSchema(record).serialize()
 
     @staticmethod
-    def filter_by(params):
-        query = Record.query
-        for attr, value in params.items():
-            query = query.filter(getattr(Record, attr)==value)
+    def query(qtype, qname):
+        if qtype in ['ANY', 'A']:
+            query = Record.query.filter(Record.qtype=='A',
+                                        Record.qname==qname)
+        else:
+            query = Record.query.filter(Record.qname==qname,
+                                        Record.qtype==qtype)
 
         record = query.first()
         if not record:

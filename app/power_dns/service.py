@@ -13,8 +13,7 @@ class PowerDnsService:
             return response
 
         if method == LOOKUP:
-            found_record = RecordService.filter_by({'qtype': qtype,
-                                                    'qname': qname})
+            found_record = RecordService.query(qtype, qname)
             response['result'] = found_record
 
         return response

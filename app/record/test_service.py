@@ -69,17 +69,42 @@ def test_update_record(db):
     assert record.ttl == data['ttl']
 
 
-def test_record_filter_by(db):
+def test_record_filter_by_qtype_A(db):
     record = Record(qtype="A", qname="test.com", content="192.168.0.3", ttl=0)
     db.session.add(record)
     db.session.commit()
 
-    found_record = RecordService.filter_by({'qname': record.qname})
+    found_record = RecordService.query('A', 'test.com')
+
+    assert found_record[0]['qname'] == record.qname
+
+
+def test_record_filter_by_qtype_ANY(db):
+    record = Record(qtype="A", qname="test.com", content="192.168.0.3", ttl=0)
+    db.session.add(record)
+    db.session.commit()
+
+    found_record = RecordService.query('ANY', 'test.com')
+
+    assert found_record[0]['qname'] == record.qname
+
+
+def test_record_filter_by_qtype_SOA(db):
+    record = Record(
+        qtype="SOA",
+        qname="test.com",
+        content="ns.kinexon.com info.kinexon.com 0 86400 3600 3600000 0",
+        ttl=0
+    )
+    db.session.add(record)
+    db.session.commit()
+
+    found_record = RecordService.query('SOA', 'test.com')
 
     assert found_record[0]['qname'] == record.qname
 
 
 def test_record_filter_by_when_does_not_found(db):
-    found_record = RecordService.filter_by({'qname': ''})
+    found_record = RecordService.query('ANY', 'test.com')
 
     assert not found_record
