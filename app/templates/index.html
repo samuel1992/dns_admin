@@ -36,7 +36,7 @@
         <label for="qtype-input">QTYPE:</label>
         <select id="qtype-input" name="qtype">
           <option value="A">A</option>
-          <option value="ANY">SOA</option>
+          <option value="SOA">SOA</option>
         </select>
 
         <label for="qname-input">QNAME:</label>
@@ -64,26 +64,20 @@
 </html>
 
 <script>
+  function recordRow(row){
+      return `<tr id="row-${row.id}"><td>${row.qname}</td><td>${row.qtype}</td><td>${row.content}</td><td>${row.ttl}</td><td><button class="recordDelBtn" id="${row.id}">Del</button></td></tr>`
+    }
+
   $(document).ready(function() {
       $.ajax({
           type: "GET",
           url: "/records",
           success: function (data) {
               data.forEach(function(row){
-                  $('#recordsTable').append(`<tr><td>${row.qname}</td><td>${row.qtype}</td><td>${row.content}</td><td>${row.ttl}</td><td><button class="recordDelBtn" id="${row.id}">Del</button></td></tr>`);
+                  $('#recordsTable').append(recordRow(row));
                 });
             }
-        });
-
-      $('body').on('click', '.recordDelBtn', function (){
-          $.ajax({
-              type: "DELETE",
-              url: "/records/" + this.id,
-              success: function(data){
-                  console.log(data)
-                }
-            });
-        });
+        }); 
     });
 
   $("#recordForm").submit(function(event){
@@ -103,8 +97,20 @@
           data: JSON.stringify(payload),
           success: function(data){
               data.forEach(function(row){
-                  $('#recordsTable').append(`<tr><td>${row.qname}</td><td>${row.qtype}</td><td>${row.content}</td><td>${row.ttl}</td><td><button class="recordDelBtn" id="${row.id}">Del</button></td></tr>`);
+                  $('#recordsTable').append(recordRow(row));
                 });
+            }
+        });
+
+      this.reset()
+    });
+
+  $('body').on('click', '.recordDelBtn', function (){
+      $.ajax({
+          type: "DELETE",
+          url: "/records/" + this.id,
+          success: function(data){
+              $('#row-' + data[0]).remove();
             }
         });
     });
