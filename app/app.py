@@ -3,12 +3,14 @@ from flask import Flask
 from extensions import db
 from config import Config
 
+from record.api import app as record_app
+
 
 def create_app():
     flask_app = Flask(__name__)
     flask_app.config.from_object(Config)
 
-    # TODO: Register our app modules/blueprints
+    flask_app.register_blueprint(record_app, url_prefix='/records')
 
     db.init_app(flask_app)
 
