@@ -9,7 +9,6 @@ services:
       - "53/udp"
   app:
     container_name: app
-    command: tail -f /dev/null
     build: app
     expose:
       - "5000"
