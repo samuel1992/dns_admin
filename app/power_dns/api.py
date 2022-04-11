@@ -1,6 +1,6 @@
 import json
 
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, Response
 
 from .service import PowerDnsService
 
@@ -16,5 +16,6 @@ def query_record():
     qname = query_data.get('parameters').get('qname')
 
     record = PowerDnsService.get_record(method, qtype, qname)
+    data = json.dumps(record)
 
-    return jsonify(record), 200
+    return Response(data, status=200, mimetype='application/json')
