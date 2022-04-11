@@ -77,3 +77,9 @@ def test_record_filter_by(db):
     found_record = RecordService.filter_by({'qname': record.qname})
 
     assert found_record[0]['qname'] == record.qname
+
+
+def test_record_filter_by_when_does_not_found(db):
+    found_record = RecordService.filter_by({'qname': ''})
+
+    assert not found_record

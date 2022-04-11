@@ -18,6 +18,6 @@ def test_query_record(service_get_record_mock, client):
             'zone-id': -1
         }
     }
-    response = client.post('/dns', json=params)
+    response = client.post('/dns', data=params)
 
     assert response.status_code == 200

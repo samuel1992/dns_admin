@@ -12,6 +12,8 @@ def test_get_record(record_service_filter_by_mock):
         'ttl': 0
     }
     record_service_filter_by_mock.return_value = [record]
-    found = PowerDnsService.get_record(LOOKUP, record['qtype'])
+    found = PowerDnsService.get_record(LOOKUP,
+                                       record['qtype'],
+                                       record['qname'])
 
-    assert found == [record]
+    assert found == {'result': [record]}

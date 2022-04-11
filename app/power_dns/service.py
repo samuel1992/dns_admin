@@ -6,12 +6,15 @@ LOOKUP = 'lookup'
 
 class PowerDnsService:
     @staticmethod
-    def get_record(method, qtype):
+    def get_record(method, qtype, qname):
+        response = {'result': []}
+
         if method == GET_DOMAIN_METADATA:
-            return []
+            return response
 
         if method == LOOKUP:
             found_record = RecordService.filter_by({'qtype': qtype,
-                                                    'method': method})
+                                                    'qname': qname})
+            response['result'] = found_record
 
-            return found_record
+        return response
