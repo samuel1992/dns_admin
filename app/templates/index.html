@@ -57,6 +57,7 @@
           <th>Qtype</th>
           <th>Content</th>
           <th>TTL</th>
+          <th></th>
         </tr>
       </table>
     </body>
@@ -69,9 +70,19 @@
           url: "/records",
           success: function (data) {
               data.forEach(function(row){
-                  $('#recordsTable').append(`<tr><td>${row.qname}</td><td>${row.qtype}</td><td>${row.content}</td><td>${row.ttl}</td></tr>`);
+                  $('#recordsTable').append(`<tr><td>${row.qname}</td><td>${row.qtype}</td><td>${row.content}</td><td>${row.ttl}</td><td><button class="recordDelBtn" id="${row.id}">Del</button></td></tr>`);
                 });
             }
+        });
+
+      $('body').on('click', '.recordDelBtn', function (){
+          $.ajax({
+              type: "DELETE",
+              url: "/records/" + this.id,
+              success: function(data){
+                  console.log(data)
+                }
+            });
         });
     });
 
@@ -92,7 +103,7 @@
           data: JSON.stringify(payload),
           success: function(data){
               data.forEach(function(row){
-                  $('#recordsTable').append(`<tr><td>${row.qname}</td><td>${row.qtype}</td><td>${row.content}</td><td>${row.ttl}</td></tr>`);
+                  $('#recordsTable').append(`<tr><td>${row.qname}</td><td>${row.qtype}</td><td>${row.content}</td><td>${row.ttl}</td><td><button class="recordDelBtn" id="${row.id}">Del</button></td></tr>`);
                 });
             }
         });

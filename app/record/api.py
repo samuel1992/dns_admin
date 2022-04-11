@@ -30,7 +30,6 @@ def update_record(record_id):
 
 @app.route('/<int:record_id>', methods=['DELETE'])
 def delete_record(record_id):
-    record_data = request.get_json()
     record = RecordService.delete(record_id)
 
     return jsonify(record), 200
