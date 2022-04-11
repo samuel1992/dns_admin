@@ -1,3 +1,5 @@
+import json
+
 from unittest.mock import patch
 
 from fixtures import client
@@ -7,7 +9,7 @@ from fixtures import client
 def test_query_record(service_get_record_mock, client):
     service_get_record_mock.return_value = [{}]
 
-    params = {
+    params = json.dumps({
         'method': 'lookup',
         'parameters': {
             'qtype': 'A',
@@ -17,7 +19,7 @@ def test_query_record(service_get_record_mock, client):
             'real-remote': '192.0.2.24',
             'zone-id': -1
         }
-    }
+    })
     response = client.post('/dns', data=params)
 
     assert response.status_code == 200
