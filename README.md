@@ -11,7 +11,10 @@ Besides that we needed to have another api to manipulate the DNS records.
 - `docker-compose up --build`
 
 ## Using it
+DISCLAIMER: I'm not a frontend person so I only created a simple page to insert/delete/list the records.
+You can access the app frontend on your `localhost:5000`
 
+### API
 POST /records
 Body:
 ```json
@@ -81,7 +84,7 @@ Response:
  [{record_id}]
 ```
 
-## PowerDNS Endpoint
+### PowerDNS Endpoint
 Here I only use the fields `method`, `qtype` and `qname`. 
 But the api allows more parameters since it follows this basic format, it will only ignore the extra fields.
 
