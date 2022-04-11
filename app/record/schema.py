@@ -4,6 +4,7 @@ from dataclasses import dataclass, asdict
 # TODO: add validation fields content. Like IP format fields
 @dataclass
 class Record:
+    id: int
     qtype: str
     qname: str
     content: str
@@ -11,7 +12,8 @@ class Record:
 
     @classmethod
     def from_instance(cls, instance):
-        return cls(qtype=instance.qtype,
+        return cls(id=instance.id,
+                   qtype=instance.qtype,
                    qname=instance.qname,
                    content=instance.content,
                    ttl=instance.ttl)

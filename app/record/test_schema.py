@@ -24,6 +24,7 @@ def test_records_schema_serialize_a_single_record(setup):
     serialized_records = records_schema.serialize()
 
     for record, srecord in zip(records, serialized_records):
+        assert record.id == srecord['id']
         assert record.qname == srecord['qname']
         assert record.qtype == srecord['qtype']
         assert record.content == srecord['content']
