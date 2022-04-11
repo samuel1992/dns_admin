@@ -1,0 +1,100 @@
+<html>
+    <head>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+      <style>
+        body {
+          font-family: arial, sans-serif;
+        }
+
+        table {
+          border-collapse: collapse;
+          margin: 0 auto;
+          width: 70%;
+        }
+
+        table, th, td {
+          border: 1px solid;
+        }
+
+        form {
+          display: flex;
+          justify-content: center;
+        }
+
+        label, input {
+          margin: 0 0.5rem;
+        }
+      </style>
+
+    </head>
+    <body>
+      <center>
+        <h1>DNS Server Admin</h1>
+      </center>
+      <form id="recordForm">
+        <label for="qtype-input">QTYPE:</label>
+        <select id="qtype-input" name="qtype">
+          <option value="A">A</option>
+          <option value="ANY">SOA</option>
+        </select>
+
+        <label for="qname-input">QNAME:</label>
+        <input type="text" name="qname" id="qname-input">
+
+        <label for="content-input">CONTENT:</label>
+        <input type="text" name="content" id="content-input">
+
+        <label for="ttl-input">TTL:</label>
+        <input type="text" name="ttl" id="ttl-input">
+
+        <input type="submit" />
+      </form>
+      <hr>
+      <table id="recordsTable">
+        <tr>
+          <th>Qname</th>
+          <th>Qtype</th>
+          <th>Content</th>
+          <th>TTL</th>
+        </tr>
+      </table>
+    </body>
+</html>
+
+<script>
+  $(document).ready(function() {
+      $.ajax({
+          type: "GET",
+          url: "/records",
+          success: function (data) {
+              data.forEach(function(row){
+                  $('#recordsTable').append(`<tr><td>${row.qname}</td><td>${row.qtype}</td><td>${row.content}</td><td>${row.ttl}</td></tr>`);
+                });
+            }
+        });
+    });
+
+  $("#recordForm").submit(function(event){
+      event.preventDefault();
+
+      var data = $("#recordForm").serializeArray();
+      var payload = {};
+      data.forEach(function(row){
+          payload[row.name] = row.value || "";
+        });
+
+      $.ajax({
+          type: "POST",
+          url: "/records/",
+          contentType: "application/json",
+          dataType: 'json',
+          data: JSON.stringify(payload),
+          success: function(data){
+              data.forEach(function(row){
+                  $('#recordsTable').append(`<tr><td>${row.qname}</td><td>${row.qtype}</td><td>${row.content}</td><td>${row.ttl}</td></tr>`);
+                });
+            }
+        });
+    });
+</script>
