@@ -1,6 +1,7 @@
 from dataclasses import dataclass, asdict
 
 
+# TODO: add validation fields content. Like IP format fields
 @dataclass
 class Record:
     id: int
