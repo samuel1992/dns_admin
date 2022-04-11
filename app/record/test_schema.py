@@ -8,8 +8,8 @@ from .model import Record
 
 @pytest.fixture
 def setup(db):
-    record1 = Record(qtype="A", qname="test.com", content="192.168.0.3")
-    record2 = Record(qtype="A", qname="2test.com", content="192.168.0.4")
+    record1 = Record(qtype="A", qname="test.com", content="192.168.0.3", ttl=0)
+    record2 = Record(qtype="A", qname="2tst.com", content="192.168.0.4", ttl=0)
     db.session.add(record1)
     db.session.add(record2)
     db.session.commit()

@@ -13,3 +13,31 @@ class RecordService:
 
         serialized_records = RecordsSchema(records).serialize()
         return serialized_records
+
+    @staticmethod
+    def create(record_data):
+        record = Record(**record_data)
+        db.session.add(record)
+        db.session.commit()
+
+        return record
+
+    @staticmethod
+    def delete(record_id):
+        record = Record.query.get(record_id)
+        if not record:
+            return []
+
+        db.session.delete(record)
+        db.session.commit()
+
+        return [record_id]
+
+    @staticmethod
+    def update(record_id, record_data):
+        record = Record.query.get(record_id)
+        record.query.update(record_data)
+
+        db.session.commit()
+
+        return record

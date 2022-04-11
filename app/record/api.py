@@ -10,3 +10,9 @@ app = Blueprint('record_api', __name__)
 def get_records():
     records = RecordService.get_all()
     return jsonify(records), 200
+
+
+@app.route('/', methods=['POST'])
+def post_record():
+    record_data = request.get_json()
+    pass
