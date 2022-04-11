@@ -7,8 +7,8 @@ The main goal is to make a tool to adminitrate the dns server records.
 - It has two APIs: one to be used by the frontend app and another to be used by the PowerDns server
 
 ## TODOS
-- Setup the project initial structure
-- Api to CRUD the DNS records via Frontend
+- Setup the project initial structure #DONE
+- Api to CRUD the DNS records via Frontend #DONE
 - Api to query the DNS records via PowerDNS
   - filter method 'lookup':
     - filter by qtype == 'SOA'
@@ -19,6 +19,8 @@ The main goal is to make a tool to adminitrate the dns server records.
       - return Array[Object(qtype:'A', qname:record.qname, content:record.content, ttl:)]
   - filter method 'getDomainMetadata'
     - return an empty array []
+- Add fields validation in model layer
+- Add fields validation in schema layer
 - Frontend to manage the records through the API
 
 ### Scratch

@@ -67,3 +67,13 @@ def test_update_record(db):
     assert record.qname == data['qname']
     assert record.content == data['content']
     assert record.ttl == data['ttl']
+
+
+def test_record_filter_by(db):
+    record = Record(qtype="A", qname="test.com", content="192.168.0.3", ttl=0)
+    db.session.add(record)
+    db.session.commit()
+
+    query = RecordService.filter_by({'qname': 'test.com'})
+
+    assert query.first() == record

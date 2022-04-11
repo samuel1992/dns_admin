@@ -41,3 +41,11 @@ class RecordService:
         db.session.commit()
 
         return RecordsSchema(record).serialize()
+
+    @staticmethod
+    def filter_by(params):
+        query = Record.query
+        for attr, value in params.items():
+            query = query.filter(getattr(Record, attr)==value)
+
+        return query
