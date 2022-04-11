@@ -20,7 +20,7 @@ class RecordService:
         db.session.add(record)
         db.session.commit()
 
-        return record
+        return RecordsSchema(record).serialize()
 
     @staticmethod
     def delete(record_id):
@@ -40,4 +40,4 @@ class RecordService:
 
         db.session.commit()
 
-        return record
+        return RecordsSchema(record).serialize()
