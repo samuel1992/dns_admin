@@ -16,7 +16,6 @@ You can access the app frontend on your `localhost:5000`
 
 ### API
 POST /records
-Body:
 ```json
 {
   "qtype": "A",
@@ -25,6 +24,7 @@ Body:
   "ttl": 0
 }
 ```
+
 Response:
 ```json
 [
@@ -38,6 +38,7 @@ Response:
 ```
 
 GET /records
+
 Response:
 ```json
 [
@@ -57,7 +58,6 @@ Response:
 ```
 
 PUT /records/{record_id}
-Body:
 ```json
 {
   "qtype": "A",
@@ -66,6 +66,7 @@ Body:
   "ttl": 0
 }
 ```
+
 Response:
 ```json
 [
@@ -79,6 +80,7 @@ Response:
 ```
 
 DELETE /records/{record_id}
+
 Response:
  ```json
  [{record_id}]
