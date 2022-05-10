@@ -81,7 +81,7 @@
       },
       methods: {
           cleanForm(){
-              this.qtype = ""
+              this.qtype = "A"
               this.qname = ""
               this.content = ""
               this.ttl = ""
@@ -93,8 +93,7 @@
               }
 
               fetch("/records/" + record.id, requestOptions)
-                .then(response => response.json())
-                .then(data => (this.getRecords()));
+                .then(() => (this.getRecords()));
           },
           getRecords(){
               fetch("/records/")
@@ -115,8 +114,7 @@
               }
 
               fetch("/records/", requestOptions)
-                .then(response => response.json())
-                .then(data => (this.getRecords()))
+                .then(() => (this.getRecords()))
                 .then(this.cleanForm())
             },
       },
